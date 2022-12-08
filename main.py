@@ -1,38 +1,65 @@
-import telebot
-from telebot import types
+import sys
+input("Введите число с ковычками")
+input("s = ")
+s = input()
+if len(s) > 15 :
+    sys.exit("errors!")
+new_s = [*s]
+new_s_2 = new_s
+new_list =    ["I", "V", "X", "L", "C", "D", "M"]
+new_list_num = [1,   5,  10,  50,  100, 500, 1000]
+num = 0
+i = 0
+x = 0
 
-bot = telebot.TeleBot('5785712093:AAFGxGzmd9cMEb6cV-xXblcw_6PsKaZ_qHo')
-age = 0;
+del new_s[0]
+del new_s[-1]
 
-@bot.message_handler(content_types=['text'])
-@bot.message_handler(commands=['start'])
-def start(message):
-    user_name = message.from_user.first_name
-    mess_hello = f'Привет, <u><b>{user_name}</b></u>. Я умный бот по математике и  могу помочь решить тебе задачки'
-    bot.send_message(message.chat.id, mess_hello, parse_mode='html')
+while new_s[i] != new_list[x]:
+    x += 1
+    if x >= 7:
+        sys.exit("errors!")
 
-    # mess_instruction = 'Если ты хочешь решить задачу, введи команду /zadan'
-    # bot.send_message(message.chat.id, mess_instruction)
-    mess_instruction = 'Если ты хочешь решить задачу, введи команду /1'
-    bot.send_message(message.chat.id, mess_instruction)
-    if message.text == "1":
-        bot.send_message(message.chat.id, mess_hello, parse_mode='html')
+while new_s_2[i] == new_list[x]:
 
+        if x == 0:
+            num = num + 1
+        if x == 1:
+            num = num + 5
+        if x == 2:
+            num = num + 10
+        if x == 3:
+            num = num + 50
+        if x == 4:
+            num = num + 100
+        if x == 5:
+            num = num + 500
+        if x == 6:
+            num = num + 1000
 
+        if len(new_s) > 1:
+            if new_s[0] == new_list[0] and new_s[1] == new_list[1]:
+                num = num - 2
+            if new_s[0] == new_list[0] and new_s[1] == new_list[2]:
+                num = num - 2
+            if new_s[0] == new_list[2] and new_s[1] == new_list[3]:
+                num = num - 20
+            if new_s[0] == new_list[2] and new_s[1] == new_list[4]:
+                num = num - 20
+            if new_s[0] == new_list[4] and new_s[1] == new_list[5]:
+                num = num - 200
+            if new_s[0] == new_list[4] and new_s[1] == new_list[6]:
+                num = num - 200
 
-@bot.message_handler(commands=['1'])
-def num_1(message):
-    mess = 'Квадратное уравнение'
-    bot.send_message(message.chat.id, "Введите коэффы")
-    bot.send_message(message.chat.id, "а = ")
-    message.number = input()
-    bot.send_message(message.chat.id, message.number)
+        del new_s_2[i]
+        x = 0
+        if i >= len(new_s):
+            break
+        while new_s[i] != new_list[x]:
+            x += 1
+            if x >= 7:
+                sys.exit("errors!")
+        if i >= len(new_s):
+            break
 
-# @bot.message_handler(commands = ['zadan'])
-# def button(message):
-#     markup = types.InlineKeyboardMarkup()
-#     markup.add(types.InlineKeyboardButton("1", url="https://www.youtube.com/watch?v=HodO2eBEz_8"))
-#     bot.send_message(message.chat.id, 'Выберите задачу', reply_markup= markup)
-
-
-bot.polling(none_stop=True)
+print(num)
